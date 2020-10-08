@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET users listing. */
 router.get('/', function(req, res, next) {
+  // res.send('respond with a resource');
 
   var products = [
     {
@@ -30,8 +31,8 @@ router.get('/', function(req, res, next) {
     imageURL: "https://images-na.ssl-images-amazon.com/images/I/61qGR60Ak9L._SL1500_.jpg"
   },
 ]
-  
-  res.render('index', { products , admin:true});
+
+  res.render('admin/view-products', {admin:true, products})
 });
 
 module.exports = router;
