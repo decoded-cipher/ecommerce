@@ -1,0 +1,24 @@
+name: E-Commerce Build Workflow
+
+on:
+  push:
+    branches: 
+      - dev
+
+jobs:
+  test:
+    name: Running a Trial Deploy Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Git Checkout
+      run: git checkout master
+    
+    - name : Git Pull
+      run: git pull dev
