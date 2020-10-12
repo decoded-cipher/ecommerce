@@ -1,4 +1,3 @@
-    
     <section>
         <div class="container">
             <div class="row">
@@ -8,9 +7,13 @@
                     <div class="card" style="width: 16rem;">
                         <img class="card-img-top mt-4" src="/product-images/{{this._id}}.jpg" alt="Card image cap">
                         <div class="card-body">
+
                             <h5 class="card-title">{{this.Name}}</h5>
+                            <h6 class="card-subtitle text-muted">{{this.Category}}</h6>
                             <p class="card-text">{{this.Description}}</p>
-                            <a href="/add-to-cart/{{this._id}}" class="btn btn-primary">Add to Cart</a>
+
+                            <button onclick="addToCart('{{this._id}}')" class="btn btn-primary">Add to Cart</button>
+                            {{!-- <a href="/add-to-cart/{{this._id}}" class="btn btn-primary">Add to Cart</a> --}}
                         </div>
                     </div>
                 </div>
