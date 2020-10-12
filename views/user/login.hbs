@@ -4,6 +4,11 @@
 
             <h2 class="text-center">Login</h2>
             <form action="/login" method="POST">
+
+                {{#if LoginErr}}
+                    <p class="error">Invalid Username or Password</p>
+                {{/if}}
+
                 <div class="form-group">
                     <label>Email Address</label>
                     <input type="email" class="form-control" name="Email" placeholder="Enter Email">
