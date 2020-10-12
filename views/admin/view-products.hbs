@@ -18,17 +18,19 @@
             <tbody>
 
                 {{#each products}}
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>{{this.Name}}</td>
-                        <td>{{this.Category}}</td>
-                        <td>{{this.Description}}</td>
-                        <td><img style="height: 50px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
-                    </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.Name}}</td>
+                    <td>{{this.Category}}</td>
+                    <td>{{this.Description}}</td>
+                    <td><img style="height: 50px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
+                    <td><a class="btn btn-primary" href="/admin/edit-product">Edit</a></td>
+                    <td><a class="btn btn-danger" href="/admin/delete-product/{{this._id}}">Delete</a></td>
+                </tr>
                 {{/each}}
 
             </tbody>
         </table>
-        
+
     </div>
 </section>
