@@ -15,8 +15,10 @@ var verifyLogin = (req, res, next) => {
 router.get('/', async (req, res, next) => {
   var user = req.session.user
   console.log(user);
-  var cartCount = await userHelpers.getCartCount(req.session.user._id)
-
+  var cartCount = null
+  if (req.session.user) {
+    cartCount = await userHelpers.getCartCount(req.session.user._id)
+  }
   productHelpers.getAllProducts().then((products) => {
     // console.log(products);
     res.render('user/view-products', { products, user, cartCount })
