@@ -12,13 +12,14 @@ var verifyLogin = (req, res, next) => {
   }
 }
 
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res, next) => {
   var user = req.session.user
   console.log(user);
+  var cartCount = await userHelpers.getCartCount(req.session.user._id)
 
   productHelpers.getAllProducts().then((products) => {
     // console.log(products);
-    res.render('user/view-products', { products, user })
+    res.render('user/view-products', { products, user, cartCount })
   })
 });
 
@@ -67,7 +68,7 @@ router.get('/logout', (req, res) => {
 router.get('/cart', verifyLogin, async(req, res) => {
   var products =await userHelpers.getCartProducts(req.session.user._id)
   console.log(products);
-  res.render('user/cart')
+  res.render('user/cart', {products, user: req.session.user})
 })
 
 router.get('/add-to-cart/:id', verifyLogin, (req, res) => {

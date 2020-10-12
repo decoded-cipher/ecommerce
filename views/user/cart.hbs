@@ -12,19 +12,19 @@
             </thead>
             <tbody>
 
-                {{!-- {{#each products}} --}}
+                {{#each products}}
                 <tr>
                     <th scope="row">1</th>
                     <td><img style="height: 75px; width: auto;"
-                            src="https://images-na.ssl-images-amazon.com/images/I/61qGR60Ak9L._SL1500_.jpg"></td>
-                    <td>One Plus 7 T</td>
+                            src="/product-images/{{this._id}}.jpg"></td>
+                    <td>{{this.Name}}</td>
                     <td>
                         <button class="cart-item-count btn btn-secondary px-3 mr-3">-</button>1
                         <button class="cart-item-count btn btn-secondary px-3 ml-3">+</button>
                     </td>
                     <td><a href="" class="btn btn-danger">Remove</a></td>
                 </tr>
-                {{!-- {{/each}} --}}
+                {{/each}}
 
             </tbody>
         </table>
