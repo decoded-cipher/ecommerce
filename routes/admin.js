@@ -27,7 +27,7 @@ router.post('/add-product', (req, res) => {
     var image = req.files.Image
     image.mv('./public/product-images/' + id + '.jpg', (err) => {
       if (!err) {
-        res.render("admin/add-product")
+        res.render('admin/add-product')
       } else {
         console.log(err);
       }
@@ -40,6 +40,18 @@ router.get('/delete-product/:id', (req, res) => {
   console.log(proId);
   productHelpers.deleteProduct(proId).then((response) => {
     res.redirect('/admin/')
+  })
+})
+
+router.get('/edit-product/:id', async(req, res) => {
+  var product = await productHelpers.getProductDetails(req.params.id)
+  console.log(product);
+  res.render('admin/edit-product', {product})
+})
+
+router.post('/edit-product/:id', (req, res) => {
+  productHelpers.updateProduct(req.params.id, req.body).then(() => {
+    res.redirect('/admin')
   })
 })
 

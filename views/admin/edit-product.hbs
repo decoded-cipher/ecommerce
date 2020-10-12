@@ -1,0 +1,30 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center mt-5 mb-3">Edit Product</h2>
+
+                <form action="/admin/edit-product/{{product._id}}" method="POST" enctype="multipart/form-data">
+                    <label for="">Name</label>
+                    <input type="text" name="Name" value="{{product.Name}}" class="form-control">
+
+                    <label for="">Category</label>
+                    <input type="text" name="Category" value="{{product.Category}}" class="form-control">
+
+                    <label for="">Price</label>
+                    <input type="text" name="Price" value="{{product.Price}}" class="form-control">
+
+                    <label for="">Description</label>
+                    <input type="text" name="Description" value="{{product.Description}}" class="form-control">
+
+                    <label class="mt-2" for="">Image</label><br>
+                    <img src="/product-images/{{product._id}}.jpg" class="mb-2" style="height: 125px; width: auto;">
+                    <input type="file" name="Image" class="form-control">
+
+                    <button type="submit" class="btn btn-success mt-4 px-5 py-2">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
