@@ -55,15 +55,17 @@ module.exports = {
                     .updateOne({'products.item' : objectId(prodId)},
                     {
                         $inc: { 'products.$.quantity' : 1 }
+                    }).then(() => {
+                        resolve()
+                    })
+                } else {
+                    db.get().collection(collection.CART_COLLECTION)
+                    .updateOne({user: ObjectId(userId)}, {
+                        $push: {products : prodObj}
+                    }).then((response) => {
+                        resolve()
                     })
                 }
-
-                // db.get().collection(collection.CART_COLLECTION)
-                // .updateOne({user: ObjectId(userId)}, {
-                //     $push: {products : prodObj}
-                // }).then((response) => {
-                //     resolve()
-                // })
 
             } else {
                 var cartObj = {
