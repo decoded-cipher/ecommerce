@@ -83,27 +83,47 @@ module.exports = {
         return new Promise(async(resolve, reject) => {
             var cartItems = await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
-                    $match: {user: objectId(userId)}
+                    $match: { user: objectId(userId) }
+                },
+                {
+                    $unwind: '$products'
+                },
+                {
+                    $project: {
+                        item: '$products.item',
+                        quantity: '$products.quantity'
+                    }
                 },
                 {
                     $lookup: {
                         from: collection.PRODUCT_COLLECTION,
-                        let :{prodList: '$products'},
-                        pipeline: [
-                            {
-                                $match: {
-                                    $expr: {
-                                        $in: ['$_id', "$$prodList"]
-                                    } 
-                                }
-                            }
-                        ],
-                        as: 'cartItems'
+                        localField: 'item',
+                        foreignField: '_id',
+                        as: 'product' 
                     }
                 }
+
+                // {
+                //     $lookup: {
+                //         from: collection.PRODUCT_COLLECTION,
+                //         let :{prodList: '$products'},
+                //         pipeline: [
+                //             {
+                //                 $match: {
+                //                     $expr: {
+                //                         $in: ['$_id', "$$prodList"]
+                //                     } 
+                //                 }
+                //             }
+                //         ],
+                //         as: 'cartItems'
+                //     }
+                // }
+
             ]).toArray()
             // resolve(cartItems)
-            resolve(cartItems[0].cartItems)
+            // console.log(cartItems[0].products);
+            resolve(cartItems)
         })
     },
 
