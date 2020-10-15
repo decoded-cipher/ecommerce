@@ -14,15 +14,15 @@
 
                 {{#each products}}
                 <tr>
-                    {{#each this.product}}
+                    {{!-- {{#each this.product}} --}}
                         <th scope="row">1</th>
                         <td><img style="height: 75px; width: auto;"
-                                src="/product-images/{{this._id}}.jpg"></td>
-                        <td>{{this.Name}}</td>
-                    {{/each}}
+                                src="/product-images/{{this.product._id}}.jpg"></td>
+                        <td>{{this.product.Name}}</td>
+                    {{!-- {{/each}} --}}
                     <td>
-                        <button class="cart-item-count btn btn-secondary px-3 mr-3">-</button>{{this.quantity}}
-                        <button class="cart-item-count btn btn-secondary px-3 ml-3">+</button>
+                        <button class="cart-item-count btn btn-secondary px-3 mr-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>{{this.quantity}}
+                        <button class="cart-item-count btn btn-secondary px-3 ml-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
                     </td>
                     <td><a href="" class="btn btn-danger">Remove</a></td>
                 </tr>
@@ -33,3 +33,20 @@
 
     </div>
 </section>
+
+<script>
+    function changeQuantity(cartId, prodId, count) {
+        $.ajax({
+            url: '/change-product-quantity',
+            method: 'POST',
+            data: {
+                cart: cartId,
+                product: prodId,
+                count: count
+            },
+            success: (response) => {
+                alert(response)
+            }
+        })
+    }
+</script>
