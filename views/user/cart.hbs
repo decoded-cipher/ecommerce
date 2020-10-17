@@ -27,7 +27,9 @@
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="cart-item-count btn btn-secondary px-3 ml-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
                     </td>
-                    <td><a href="" class="btn btn-danger">Remove</a></td>
+                    <td>
+                        <button class="btn btn-danger" onclick="removeCartProduct( '{{this._id}}' , '{{this.product._id}}' )">Remove</button>
+                    </td>
                 </tr>
                 {{/each}}
 
@@ -60,6 +62,22 @@
                     document.getElementById(prodId).innerHTML = quantity + count
                 }
                 // alert(response)
+            }
+        })
+    }
+
+    function removeCartProduct(cartId, prodId) {
+
+        $.ajax({
+            url: '/remove-cart-product',
+            method: 'POST',
+            data: {
+                cart: cartId,
+                product: prodId
+            },
+            success: () => {
+                alert("Product removed from Cart:")
+                location.reload()
             }
         })
     }

@@ -88,4 +88,9 @@ router.post('/change-product-quantity', (req, res, next) => {
   })
 })
 
+router.post('/remove-cart-product', (req, res) => {
+  userHelpers.removeCartProduct(req.body)
+    res.redirect('/cart')
+})
+
 module.exports = router;
