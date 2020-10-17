@@ -7,6 +7,7 @@
                     <th scope="col">SI No:</th>
                     <th scope="col">Item</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
                 </tr>
             </thead>
@@ -19,6 +20,7 @@
                         <td><img style="height: 75px; width: auto;"
                                 src="/product-images/{{this.product._id}}.jpg"></td>
                         <td>{{this.product.Name}}</td>
+                        <td>₹ {{this.product.Price}}</td>
                     {{!-- {{/each}} --}}
                     <td>
                         <button class="cart-item-count btn btn-secondary px-3 mr-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>

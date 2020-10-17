@@ -11,6 +11,7 @@
                     <th scope="col">SI No:</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Category</th>
+                    <th scope="col" class="px-4">Price</th>
                     <th scope="col">Description</th>
                     <th scope="col">Image</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <td>1</td>
                     <td>{{this.Name}}</td>
                     <td>{{this.Category}}</td>
+                    <td class="px-4">{{this.Price}}</td>
                     <td>{{this.Description}}</td>
                     <td><img style="height: 50px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
                     <td><a class="btn btn-primary" href="/admin/edit-product/{{this._id}}">Edit</a></td>
