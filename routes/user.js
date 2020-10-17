@@ -93,4 +93,8 @@ router.post('/remove-cart-product', (req, res) => {
     res.redirect('/cart')
 })
 
+router.get('/place-order', (req, res) => {
+  res.render('user/place-order')
+})
+
 module.exports = router;

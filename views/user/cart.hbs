@@ -16,19 +16,21 @@
                 {{#each products}}
                 <tr>
                     {{!-- {{#each this.product}} --}}
-                        <th scope="row">1</th>
-                        <td><img style="height: 75px; width: auto;"
-                                src="/product-images/{{this.product._id}}.jpg"></td>
-                        <td>{{this.product.Name}}</td>
-                        <td>₹ {{this.product.Price}}</td>
+                    <th scope="row">1</th>
+                    <td><img style="height: 75px; width: auto;" src="/product-images/{{this.product._id}}.jpg"></td>
+                    <td>{{this.product.Name}}</td>
+                    <td>₹ {{this.product.Price}}</td>
                     {{!-- {{/each}} --}}
                     <td>
-                        <button class="cart-item-count btn btn-secondary px-3 mr-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>
+                        <button class="cart-item-count btn btn-secondary px-3 mr-3"
+                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="cart-item-count btn btn-secondary px-3 ml-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
+                        <button class="cart-item-count btn btn-secondary px-3 ml-3"
+                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" onclick="removeCartProduct( '{{this._id}}' , '{{this.product._id}}' )">Remove</button>
+                        <button class="btn btn-danger"
+                            onclick="removeCartProduct( '{{this._id}}' , '{{this.product._id}}' )">Remove</button>
                     </td>
                 </tr>
                 {{/each}}
@@ -36,8 +38,17 @@
             </tbody>
         </table>
 
+        <hr style="margin-top: 60px;">
+        <div class="float-right">
+            <h4 class="float-center mx-5 px-5 text-centered text-muted">Total : ₹ 80000</h4>
+            <a href="/place-order" style="width: 100%;" class="btn btn-success my-2 py-2">Place Order</a>
+        </div>
+        <hr style="margin-top: 125px;">
+        <hr style="margin-bottom: 80px;">
+
     </div>
 </section>
+
 
 <script>
     function changeQuantity(cartId, prodId, count) {
