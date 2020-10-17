@@ -21,7 +21,8 @@
                         <td>{{this.product.Name}}</td>
                     {{!-- {{/each}} --}}
                     <td>
-                        <button class="cart-item-count btn btn-secondary px-3 mr-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>{{this.quantity}}
+                        <button class="cart-item-count btn btn-secondary px-3 mr-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="cart-item-count btn btn-secondary px-3 ml-3" onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
                     </td>
                     <td><a href="" class="btn btn-danger">Remove</a></td>
@@ -36,16 +37,27 @@
 
 <script>
     function changeQuantity(cartId, prodId, count) {
+
+        var quantity = parseInt(document.getElementById(prodId).innerHTML)
+        count = parseInt(count)
+
         $.ajax({
             url: '/change-product-quantity',
             method: 'POST',
             data: {
                 cart: cartId,
                 product: prodId,
-                count: count
+                count: count,
+                quantity: quantity
             },
             success: (response) => {
-                alert(response)
+                if (response.removeProduct) {
+                    alert("Product removed from Cart:")
+                    location.reload()
+                } else {
+                    document.getElementById(prodId).innerHTML = quantity + count
+                }
+                // alert(response)
             }
         })
     }
