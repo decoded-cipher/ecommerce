@@ -1,0 +1,37 @@
+<section>
+    <div class="container">
+
+        <form action="/user/place-order" id="checkout-form" method="POST">
+
+            <div class="float-left col-md-6 mt-5">
+                <h2 class="text-center mt-5 mb-4">Enter Delivery Details</h2>
+
+                <label for="">Address</label>
+                <input id="address" type="text" name="Address" class="form-control">
+
+                <label for="">PIN Code</label>
+                <input id="pincode" type="text" name="Pincode" class="form-control">
+
+                <label for="">Mobile Number</label>
+                <input id="mobile" type="text" name="Mobile" class="form-control">
+            </div>
+
+            <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;" class="checkout col-md-5 float-right">
+                <h4>Total Amount : ₹ {{total}}</h4>
+                <hr>
+                <h5>Payment Method</h5>
+
+                <div class="payment my-4">
+                    <input type="radio" id="cod" name="payment-method" value="cod" checked>
+                    <label for="cod">COD</label><br>
+                    <input type="radio" id="online" name="payment-method" value="online">
+                    <label for="online">Online Payment</label><br>
+                </div>
+
+                <button type="submit" style="width: 100%;" class="btn btn-primary py-2 text-centered">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+</section>
