@@ -82,7 +82,7 @@ router.get('/add-to-cart/:id', (req, res) => {
 })
 
 router.post('/change-product-quantity', (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   userHelpers.changeProductQuantity(req.body).then((response) => {
     res.json(response)
   })
@@ -93,8 +93,10 @@ router.post('/remove-cart-product', (req, res) => {
     res.redirect('/cart')
 })
 
-router.get('/place-order', (req, res) => {
-  res.render('user/place-order')
+router.get('/place-order', verifyLogin, async(req, res) => {
+  var total = await userHelpers.getTotalAmount(req.session.user._id)
+  // console.log(total);
+  res.render('user/place-order', {total})
 })
 
 module.exports = router;
