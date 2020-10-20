@@ -23,10 +23,10 @@
                     {{!-- {{/each}} --}}
                     <td>
                         <button class="cart-item-count btn btn-secondary px-3 mr-3"
-                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , -1 )">-</button>
+                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , '{{../user._id}}' , -1 )">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="cart-item-count btn btn-secondary px-3 ml-3"
-                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , 1 )">+</button>
+                            onclick="changeQuantity( '{{this._id}}' , '{{this.product._id}}' , '{{../user._id}}' , 1 )">+</button>
                     </td>
                     <td>
                         <button class="btn btn-danger"
@@ -40,7 +40,7 @@
 
         <hr style="margin-top: 60px;">
         <div class="float-right">
-            <h4 class="float-center mx-5 px-5 text-centered text-muted">Total : ₹ 80000</h4>
+            <h4 class="float-center mx-5 px-5 text-centered text-muted">Total : ₹ <span id="total">{{totalValue}}</span></h4>
             <a href="/place-order" style="width: 100%;" class="btn btn-success my-2 py-2">Place Order</a>
         </div>
         <hr style="margin-top: 125px;">
@@ -51,10 +51,11 @@
 
 
 <script>
-    function changeQuantity(cartId, prodId, count) {
+    function changeQuantity(cartId, prodId, userId, count) {
 
         var quantity = parseInt(document.getElementById(prodId).innerHTML)
         count = parseInt(count)
+        console.log(userId)
 
         $.ajax({
             url: '/change-product-quantity',
@@ -62,6 +63,7 @@
             data: {
                 cart: cartId,
                 product: prodId,
+                user: userId,
                 count: count,
                 quantity: quantity
             },
@@ -71,6 +73,7 @@
                     location.reload()
                 } else {
                     document.getElementById(prodId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
                 }
                 // alert(response)
             }
