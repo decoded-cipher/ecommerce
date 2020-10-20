@@ -1,19 +1,19 @@
 <section>
     <div class="container">
 
-        <form action="/user/place-order" id="checkout-form" method="POST">
+        <form action="" id="checkout-form">
 
             <div class="float-left col-md-6 mt-5">
                 <h2 class="text-center mt-5 mb-4">Enter Delivery Details</h2>
 
                 <label for="">Address</label>
-                <input id="address" type="text" name="Address" class="form-control">
+                <input id="address" type="text" name="address" class="form-control">
 
                 <label for="">PIN Code</label>
-                <input id="pincode" type="text" name="Pincode" class="form-control">
+                <input id="pincode" type="text" name="pincode" class="form-control">
 
                 <label for="">Mobile Number</label>
-                <input id="mobile" type="text" name="Mobile" class="form-control">
+                <input id="mobile" type="text" name="mobile" class="form-control">
             </div>
 
             <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;" class="checkout col-md-5 float-right">
@@ -22,9 +22,9 @@
                 <h5>Payment Method</h5>
 
                 <div class="payment my-4">
-                    <input type="radio" id="cod" name="payment-method" value="cod" checked>
+                    <input type="radio" id="cod" name="payment-method" value="COD" checked>
                     <label for="cod">COD</label><br>
-                    <input type="radio" id="online" name="payment-method" value="online">
+                    <input type="radio" id="online" name="payment-method" value="ONLINE">
                     <label for="online">Online Payment</label><br>
                 </div>
 
@@ -35,3 +35,18 @@
 
     </div>
 </section>
+
+
+<script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/place-order',
+            method: 'POST',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                alert(response)
+            }
+        })
+    })
+</script>

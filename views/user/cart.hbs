@@ -72,6 +72,7 @@
                     alert("Product removed from Cart:")
                     location.reload()
                 } else {
+                    console.log(response)
                     document.getElementById(prodId).innerHTML = quantity + count
                     document.getElementById('total').innerHTML = response.total
                 }
