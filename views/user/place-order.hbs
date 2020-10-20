@@ -47,6 +47,9 @@
             method: 'POST',
             data: $('#checkout-form').serialize(),
             success: (response) => {
+                // if (response.status) {
+                   //  location.href = ''
+                // }
                 alert(response)
             }
         })

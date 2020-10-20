@@ -245,9 +245,12 @@ module.exports = {
                     userId: objectId(order.userId),
                     paymentMethod: order['payment-method'],
                     products: products,
-                    status: status
+                    totalAmount: total,
+                    status: status,
+                    date: new Date()
                 }
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
+                    db.get().collection(collection.CART_COLLECTION).removeOne({user: objectId(order.userId)})
                     resolve()
                 })
             })
