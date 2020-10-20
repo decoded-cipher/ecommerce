@@ -110,4 +110,16 @@ router.post('/place-order', async(req, res) => {
   // console.log(req.body);
 })
 
+router.get('/order-complete', (req, res) => {
+  var user = req.session.user
+  // console.log(user);
+  res.render('user/order-complete', {user})
+})
+
+router.get('/order-history', (req, res) => {
+  var user = req.session.user
+  // console.log(user);
+  res.render('user/order-history', {user})
+})
+
 module.exports = router;
