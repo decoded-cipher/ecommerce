@@ -110,20 +110,21 @@ router.post('/place-order', async(req, res) => {
   // console.log(req.body);
 })
 
-router.get('/order-complete', (req, res) => {
+router.get('/order-complete', verifyLogin, (req, res) => {
   // console.log(user);
   res.render('user/order-complete', {user: req.session.user})
 })
 
-router.get('/orders', async(req, res) => {
+router.get('/orders', verifyLogin, async(req, res) => {
   var orders = await userHelpers.getUserOrders(req.session.user._id)
-  console.log(orders);
+  // console.log(orders);
   res.render('user/orders', {user: req.session.user, orders})
 })
 
-router.get('/view-order-products', (req, res) => {
+router.get('/view-order-products/:id', verifyLogin, async(req, res) => {
   // console.log(user);
-  res.render('user/view-order-products', {user: req.session.user})
+  var products = await userHelpers.getOrderProducts(req.params.id)
+  res.render('user/view-order-products', {user: req.session.user, products})
 })
 
 module.exports = router;
