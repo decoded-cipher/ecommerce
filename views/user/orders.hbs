@@ -1,0 +1,43 @@
+<section>
+    <div class="container mt-5">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Address</th>
+                    {{!-- <th scope="col">PIN Code</th> --}}
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Payment</th>
+                    <th scope="col">Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <td>{{this.date}}</td>
+                    <td>{{this.deliveryDetails.address}}, {{this.deliveryDetails.pincode}}</td>
+                    {{!-- <td>{{this.deliveryDetails.pincode}}</td> --}}
+                    <td>{{this.deliveryDetails.mobile}}</td>
+                    <td>{{this.totalAmount}}</td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>{{this.status}}</td>
+
+                    <td><a class="btn btn-primary" href="/view-order-products">View Products</a></td>
+
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+
+    </div>
+</section>
+
+<script>
+    function dateConversion(x) {
+        return x.toLocaleDateString()
+    }
+</script>
