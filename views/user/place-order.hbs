@@ -18,7 +18,8 @@
                 <input type="text" name="userId" value="{{user._id}}" hidden>
             </div>
 
-            <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;" class="checkout col-md-5 float-right">
+            <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;"
+                class="checkout col-md-5 float-right">
                 <h4>Total Amount : ₹ {{total}}</h4>
                 <hr>
                 <h5>Payment Method</h5>
@@ -47,11 +48,55 @@
             method: 'POST',
             data: $('#checkout-form').serialize(),
             success: (response) => {
-                if (response.status) {
+
+                console.log(response)
+                if (response.COD_success) {
                     location.href = '/order-complete'
+                } else {
+                    razorPayPayment(response)
                 }
-                // alert(response)
+
             }
         })
     })
+
+    function razorPayPayment(order) {
+        var options = {
+            "key": "rzp_test_FdLHOIWpFAHRd2", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Shopping Cart",
+            "description": "Shopping Cart Online Test Transaction",
+            "image": "https://arjunkrishna.in/images/profile-pic.jpg",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+                alert(response.razorpay_payment_id);
+                alert(response.razorpay_order_id);
+                alert(response.razorpay_signature)
+
+                verifyPayment(response, order)
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#528FF0"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            data: { payment, order },
+            method: 'POST'
+        })
+    }
 </script>
