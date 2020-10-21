@@ -1,3 +1,26 @@
-<section>
-    <h1>View Order Products</h1>
-</section>
+    <section>
+        <div class="container">
+            <div class="row">
+
+                {{#each products}}
+                <div class="col-md-3 mt-5">
+                    <div class="card" style="width: 16rem;">
+                        <img class="card-img-top mt-4" src="/product-images/{{this.product._id}}.jpg"
+                            alt="Card image cap">
+                        <div class="card-body">
+
+                            <h5 class="card-title">{{this.product.Name}}</h5>
+                            <h6 class="card-subtitle text-muted">{{this.product.Category}}</h6>
+                            <p class="card-subtitle text-muted pt-4">Cost per pcs : ₹ {{this.product.Price}}</p>
+                            {{!-- <p class="card-text">{{this.product.Description}}</p> --}}
+                            <p class="card-subtitle text-muted pt-1 pb-3">Purchased Quantity : {{this.quantity}}</p>
+
+
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+            </div>
+        </div>
+    </section>
