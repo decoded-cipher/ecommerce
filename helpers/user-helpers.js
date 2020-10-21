@@ -247,7 +247,7 @@ module.exports = {
                     products: products,
                     totalAmount: total,
                     status: status,
-                    date: new Date()
+                    date: new Date().toLocaleDateString()
                 }
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
                     db.get().collection(collection.CART_COLLECTION).removeOne({user: objectId(order.userId)})
@@ -260,6 +260,15 @@ module.exports = {
             return new Promise(async(resolve, reject) => {
                 var cart = await db.get().collection(collection.CART_COLLECTION).findOne({user: objectId(userId)})
                 resolve(cart.products)
+            })
+        },
+
+        getUserOrders: (userId) => {
+            return new Promise(async(resolve, reject) => {
+                // console.log(userId);
+                var orders = await db.get().collection(collection.ORDER_COLLECTION).find({userId : ObjectId(userId)}).toArray()
+                console.log(orders);
+                resolve(orders)
             })
         }
     }
