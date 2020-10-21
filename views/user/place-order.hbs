@@ -18,7 +18,8 @@
                 <input type="text" name="userId" value="{{user._id}}" hidden>
             </div>
 
-            <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;" class="checkout col-md-5 float-right">
+            <div style="border: 1px solid; padding: 35px 35px; margin: 80px 10px;"
+                class="checkout col-md-5 float-right">
                 <h4>Total Amount : ₹ {{total}}</h4>
                 <hr>
                 <h5>Payment Method</h5>
@@ -47,28 +48,33 @@
             method: 'POST',
             data: $('#checkout-form').serialize(),
             success: (response) => {
-                if (response.status) {
+
+                console.log(response)
+                if (response.COD_success) {
                     location.href = '/order-complete'
                 } else {
                     razorPayPayment(response)
                 }
+
             }
         })
     })
 
-    function order {
+    function razorPayPayment(order) {
         var options = {
-            "key": "YOUR_KEY_ID", // Enter the Key ID generated from the Dashboard
-            "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "key": "rzp_test_FdLHOIWpFAHRd2", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
             "currency": "INR",
-            "name": "Acme Corp",
-            "description": "Test Transaction",
-            "image": "https://example.com/your_logo",
-            "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-            "handler": function (response){
+            "name": "Shopping Cart",
+            "description": "Shopping Cart Online Test Transaction",
+            "image": "https://arjunkrishna.in/images/profile-pic.jpg",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
                 alert(response.razorpay_payment_id);
                 alert(response.razorpay_order_id);
                 alert(response.razorpay_signature)
+
+                verifyPayment(response, order)
             },
             "prefill": {
                 "name": "Gaurav Kumar",
@@ -79,9 +85,18 @@
                 "address": "Razorpay Corporate Office"
             },
             "theme": {
-                "color": "#F37254"
+                "color": "#528FF0"
             }
         };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
     }
 
+    function verifyPayment(payment, order) {
+        $.ajax({
+            url: '/verify-payment',
+            data: { payment, order },
+            method: 'POST'
+        })
+    }
 </script>
