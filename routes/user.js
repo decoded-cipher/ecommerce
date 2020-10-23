@@ -69,7 +69,11 @@ router.get('/logout', (req, res) => {
 
 router.get('/cart', verifyLogin, async(req, res) => {
   var products = await userHelpers.getCartProducts(req.session.user._id)
-  var totalValue = await userHelpers.getTotalAmount(req.session.user._id)
+
+  var totalValue = 0
+  if (products.length > 0) {
+    totalValue = await userHelpers.getTotalAmount(req.session.user._id)
+  }
   console.log(products);
   res.render('user/cart', {products, user: req.session.user, totalValue})
 })
@@ -136,8 +140,17 @@ router.get('/view-order-products/:id', verifyLogin, async(req, res) => {
   res.render('user/view-order-products', {user: req.session.user, products})
 })
 
-router.post('/verify-payment', (require, res) => {
+router.post('/verify-payment', (req, res) => {
   console.log(req.body);
+  userHelpers.verifyPayment(req.body).then(() => {
+    userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
+      console.log("Payment Successfull");
+      res.json({status : true})
+    })
+  }).catch((err) => {
+    console.log(err);
+    res.json({status : false, errMsg: 'Payment Failed'})
+  })
 })
 
 module.exports = router;
