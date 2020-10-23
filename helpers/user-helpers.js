@@ -320,7 +320,8 @@ module.exports = {
         generateRazorpay: (orderId, total) => {
             return new Promise((resolve, reject) => {
                 var options = {
-                    amount: total * 100,
+                    // amount: total * 100,
+                    amount: total,          // For saving Razorpay Payment Trial Limit
                     currency: "INR",
                     receipt: "" + orderId
                   };
