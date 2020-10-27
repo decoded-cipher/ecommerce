@@ -1,32 +1,33 @@
 <section>
-    <div class="container">
+    <div class="container mb-5">
 
         <div class="row">
-            <a href="admin/add-product" class="btn btn-success ml-auto m-3 px-4 py-2">Add Product</a>
+            <a href="admin/add-product" class="btn btn-success my-4 ml-auto m-3 px-5 py-2">Add Product</a>
         </div>
 
-        <table class="table">
+        <table class="table" id="productTable">
             <thead>
                 <tr>
-                    <th scope="col">SI No:</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col" class="px-4">Price</th>
+                    <th style="width: 200px;" scope="col">Product Name</th>
+                    <th style="width: 130px;" scope="col">Category</th>
+                    <th style="width: 80px;" scope="col">Price</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Image</th>
+                    <th class="px-5" scope="col">Image</th>
+                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each products}}
                 <tr>
-                    <td>1</td>
-                    <td>{{this.Name}}</td>
-                    <td>{{this.Category}}</td>
-                    <td class="px-4">{{this.Price}}</td>
+                    <td style="width: 200px;">{{this.Name}}</td>
+                    <td style="width: 130px;">{{this.Category}}</td>
+                    <td style="width: 80px;">{{this.Price}}</td>
                     <td>{{this.Description}}</td>
-                    <td><img style="height: 50px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
-                    <td><a class="btn btn-primary" href="/admin/edit-product/{{this._id}}">Edit</a></td>
-                    <td><a class="btn btn-danger" href="/admin/delete-product/{{this._id}}" onclick="return confirm('Do you want to delete {{this.Name}} ?')">Delete</a></td>
+                    <td class="px-5"><img style="height: 55px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
+                    <td style="width: 150px;">
+                        <a class="mx-2 btn btn-primary" href="/admin/edit-product/{{this._id}}">Edit</a>
+                        <a class="btn btn-danger" href="/admin/delete-product/{{this._id}}" onclick="return confirm('Do you want to delete {{this.Name}} ?')">Delete</a>
+                    </td>
                 </tr>
                 {{/each}}
 
@@ -35,3 +36,9 @@
 
     </div>
 </section>
+
+<script>
+    $(document).ready( function () {
+        $('#productTable').DataTable();
+    });
+</script>
