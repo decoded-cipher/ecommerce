@@ -4,6 +4,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">SI No:</th>
                     <th scope="col">Date</th>
                     <th scope="col">Address</th>
                     {{!-- <th scope="col">PIN Code</th> --}}
@@ -17,6 +18,7 @@
             <tbody>
                 {{#each orders}}
                 <tr>
+                    <td class="count"></td>
                     <td>{{this.date}}</td>
                     <td>{{this.deliveryDetails.address}}, {{this.deliveryDetails.pincode}}</td>
                     {{!-- <td>{{this.deliveryDetails.pincode}}</td> --}}
@@ -41,3 +43,14 @@
         return x.toLocaleDateString()
     }
 </script>
+
+<style>
+    table {
+        counter-reset: section;
+    }
+
+    .count:before {
+        counter-increment: section;
+        content: counter(section);
+    }
+</style>

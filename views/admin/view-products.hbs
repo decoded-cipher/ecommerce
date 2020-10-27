@@ -8,8 +8,9 @@
         <table class="table" id="productTable">
             <thead>
                 <tr>
-                    <th style="width: 200px;" scope="col">Product Name</th>
-                    <th style="width: 130px;" scope="col">Category</th>
+                    <th style="width: 50px;" scope="col">SI No:</th>
+                    <th style="width: 180px;" scope="col">Product Name</th>
+                    <th style="width: 120px;" scope="col">Category</th>
                     <th style="width: 80px;" scope="col">Price</th>
                     <th scope="col">Description</th>
                     <th class="px-5" scope="col">Image</th>
@@ -19,8 +20,9 @@
             <tbody>
                 {{#each products}}
                 <tr>
-                    <td style="width: 200px;">{{this.Name}}</td>
-                    <td style="width: 130px;">{{this.Category}}</td>
+                    <td style="width: 50px;" class="count"></td>
+                    <td style="width: 180px;">{{this.Name}}</td>
+                    <td style="width: 120px;">{{this.Category}}</td>
                     <td style="width: 80px;">{{this.Price}}</td>
                     <td>{{this.Description}}</td>
                     <td class="px-5"><img style="height: 55px; width: auto;" src="/product-images/{{this._id}}.jpg"></td>
@@ -42,3 +44,14 @@
         $('#productTable').DataTable();
     });
 </script>
+
+<style>
+    table {
+        counter-reset: section;
+    }
+
+    .count:before {
+        counter-increment: section;
+        content: counter(section);
+    }
+</style>
