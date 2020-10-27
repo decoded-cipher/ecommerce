@@ -16,7 +16,7 @@
                 {{#each products}}
                 <tr>
                     {{!-- {{#each this.product}} --}}
-                    <th scope="row">1</th>
+                    <th class="count"></th>
                     <td><img style="height: 75px; width: auto;" src="/product-images/{{this.product._id}}.jpg"></td>
                     <td>{{this.product.Name}}</td>
                     <td>₹ {{this.product.Price}}</td>
@@ -97,3 +97,14 @@
         })
     }
 </script>
+
+<style>
+    table {
+        counter-reset: section;
+    }
+
+    .count:before {
+        counter-increment: section;
+        content: counter(section);
+    }
+</style>

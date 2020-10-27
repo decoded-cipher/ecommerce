@@ -4,19 +4,20 @@ const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 
 var productHelper = require('../helpers/product-helpers')
+var userHelpers = require('../helpers/user-helpers');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
 
   productHelpers.getAllProducts().then((products) => {
-    console.log(products);
+    // console.log(products);
     res.render('admin/view-products', {admin:true, products})
   })
 });
 
 router.get('/add-product', (req, res) => {
-  res.render('admin/add-product')
+  res.render('admin/add-product', {admin:true})
 });
 
 router.post('/add-product', (req, res) => {
@@ -46,7 +47,7 @@ router.get('/delete-product/:id', (req, res) => {
 router.get('/edit-product/:id', async(req, res) => {
   var product = await productHelpers.getProductDetails(req.params.id)
   console.log(product);
-  res.render('admin/edit-product', {product})
+  res.render('admin/edit-product', {admin:true, product})
 })
 
 router.post('/edit-product/:id', (req, res) => {
@@ -63,6 +64,13 @@ router.post('/edit-product/:id', (req, res) => {
         // }
       })
     }
+  })
+})
+
+router.get('/users', (req, res) => {
+  userHelpers.getUserList().then((users) => {
+    // console.log(users);
+    res.render('admin/view-users', {admin:true, users})
   })
 })
 

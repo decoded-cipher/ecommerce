@@ -1,0 +1,38 @@
+<section>
+    <div class="container">
+
+        <table class="table my-5">
+            <thead>
+                <tr>
+                    <th scope="col">SI No:</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    {{!-- <th scope="col">Options</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <td class="count"></td>
+                    <td>{{this.Name}}</td>
+                    <td>{{this.Email}}</td>
+                    {{!-- <td><a class="btn btn-primary" href="#">View Order History</a></td> --}}
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+
+    </div>
+</section>
+
+<style>
+    table {
+        counter-reset: section;
+    }
+
+    .count:before {
+        counter-increment: section;
+        content: counter(section);
+    }
+</style>

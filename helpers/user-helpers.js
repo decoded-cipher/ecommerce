@@ -364,5 +364,12 @@ module.exports = {
                     resolve()
                 })
             })
+        },
+
+        getUserList: () => {
+            return new Promise((resolve, reject) => {
+                var users = db.get().collection(collection.USER_COLLECTION).find().toArray()
+                resolve(users)
+            })
         }
     }
